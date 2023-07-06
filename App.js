@@ -29,6 +29,7 @@ const App = () => {
       text.length === 0
         ? 'No text has been entered.'
         : `The text entered is: '${text}'.`;
+    console.log(input);
     Alert.alert(input);
   };
 
