@@ -6,12 +6,15 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
+  Alert,
+  Pressable,
   SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   useColorScheme,
   View,
 } from 'react-native';
@@ -19,11 +22,29 @@ import {
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
+  const [text, onChangeText] = useState('');
+
+  const onButtonPress = () => {
+    const input =
+      text.length === 0
+        ? 'No text has been entered.'
+        : `The text entered is: '${text}'.`;
+    Alert.alert(input);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <View style={[styles.innerView]}>
-        <Text>Hello, World! This is an ERN mini app!</Text>
+        <Pressable style={styles.buttonStyle} onPress={onButtonPress}>
+          <Text style={styles.buttonText}>Press Me!</Text>
+        </Pressable>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeText}
+          value={text}
+          placeholder="Enter Text"
+        />
       </View>
     </SafeAreaView>
   );
@@ -37,9 +58,32 @@ const styles = StyleSheet.create({
   },
   innerView: {
     flex: 1,
-    backgroundColor: '#0492C2',
-    alignItems: 'center',
+    margin: 5,
     justifyContent: 'center',
+    borderColor: '#0000ff',
+    borderWidth: 2,
+    borderRadius: 16,
+  },
+  buttonStyle: {
+    padding: 16,
+    marginHorizontal: 16,
+    borderColor: '#000000',
+    borderRadius: 16,
+    borderWidth: 1,
+    marginBottom: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#000000',
+    fontWeight: '700',
+    fontSize: 20,
+  },
+  input: {
+    height: 40,
+    margin: 16,
+    borderWidth: 1,
+    padding: 12,
   },
 });
 
