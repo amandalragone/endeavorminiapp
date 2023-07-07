@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   Alert,
   Pressable,
@@ -20,12 +20,6 @@ import {
 } from 'react-native';
 
 const App = props => {
-  // const {buttonText, buttonColor} = props;
-
-  useEffect(() => {
-    console.log('props is', props);
-  }, []);
-
   const isDarkMode = useColorScheme() === 'dark';
 
   const [text, onChangeText] = useState('');
@@ -35,7 +29,6 @@ const App = props => {
       text.length === 0
         ? 'No text has been entered.'
         : `The text entered is: '${text}'.`;
-    console.log(input);
     Alert.alert(input);
   };
 
@@ -45,8 +38,10 @@ const App = props => {
       <View style={[styles.innerView]}>
         <Pressable style={styles.buttonStyle} onPress={onButtonPress}>
           <Text
-            style={styles.buttonText}
-            color={props.buttonColor ?? '#536040'}>
+            style={[
+              styles.buttonText,
+              props.buttonColor && {backgroundColor: props.buttonColor},
+            ]}>
             {props.buttonText ?? 'Press Me!'}
           </Text>
         </Pressable>
