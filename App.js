@@ -19,7 +19,9 @@ import {
   View,
 } from 'react-native';
 
-const App = () => {
+const App = ({props}) => {
+  const {buttonText, buttonColor} = props;
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const [text, onChangeText] = useState('');
@@ -38,7 +40,9 @@ const App = () => {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <View style={[styles.innerView]}>
         <Pressable style={styles.buttonStyle} onPress={onButtonPress}>
-          <Text style={styles.buttonText}>Press Me!</Text>
+          <Text style={styles.buttonText} color={buttonColor}>
+            {buttonText}
+          </Text>
         </Pressable>
         <TextInput
           style={styles.input}
