@@ -19,11 +19,11 @@ import {
   View,
 } from 'react-native';
 
-const App = () => {
-  const {buttonText, buttonColor} = this.props;
+const App = props => {
+  // const {buttonText, buttonColor} = props;
 
   useEffect(() => {
-    console.log('props is', this.props);
+    console.log('props is', props);
   }, []);
 
   const isDarkMode = useColorScheme() === 'dark';
@@ -44,8 +44,10 @@ const App = () => {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <View style={[styles.innerView]}>
         <Pressable style={styles.buttonStyle} onPress={onButtonPress}>
-          <Text style={styles.buttonText} color={buttonColor}>
-            {buttonText}
+          <Text
+            style={styles.buttonText}
+            color={props.buttonColor ?? '#536040'}>
+            {props.buttonText ?? 'Press Me!'}
           </Text>
         </Pressable>
         <TextInput
