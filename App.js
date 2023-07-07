@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Alert,
   Pressable,
@@ -19,8 +19,12 @@ import {
   View,
 } from 'react-native';
 
-const App = ({props}) => {
-  const {buttonText, buttonColor} = props;
+const App = () => {
+  const {buttonText, buttonColor} = this.props;
+
+  useEffect(() => {
+    console.log('props is', this.props);
+  }, []);
 
   const isDarkMode = useColorScheme() === 'dark';
 
