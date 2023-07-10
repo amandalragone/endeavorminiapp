@@ -30,7 +30,11 @@ const App = props => {
         ? 'No text has been entered.'
         : `The text entered is: '${text}'.`;
 
-    electrodeBridge.emitEvent('endeavorminiapp.onButtonPress', {input: input});
+    console.log('JS says', input);
+
+    electrodeBridge.emitEvent('endeavorminiapp.onButtonPress', {
+      data: {input: input},
+    });
   };
 
   return (
