@@ -8,7 +8,6 @@
 
 import React, {useState} from 'react';
 import {
-  Alert,
   Pressable,
   SafeAreaView,
   StatusBar,
@@ -18,6 +17,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import {electrodeBridge} from 'react-native-electrode-bridge';
 
 const App = props => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -29,7 +29,8 @@ const App = props => {
       text.length === 0
         ? 'No text has been entered.'
         : `The text entered is: '${text}'.`;
-    Alert.alert(input);
+
+    electrodeBridge.emitEvent('endeavorminiapp.onButtonPress', {input: input});
   };
 
   return (
