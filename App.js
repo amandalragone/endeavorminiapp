@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Pressable,
   SafeAreaView,
@@ -23,6 +23,10 @@ const App = props => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const [text, onChangeText] = useState('');
+
+  useEffect(() => {
+    console.log('props object:', props);
+  }, []);
 
   const onButtonPress = () => {
     const input =
@@ -41,12 +45,13 @@ const App = props => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <View style={[styles.innerView]}>
-        <Pressable style={styles.buttonStyle} onPress={onButtonPress}>
-          <Text
-            style={[
-              styles.buttonText,
-              props.buttonColor && {backgroundColor: props.buttonColor},
-            ]}>
+        <Pressable
+          style={[
+            styles.buttonStyle,
+            props.buttonColor && {backgroundColor: props.buttonColor},
+          ]}
+          onPress={onButtonPress}>
+          <Text style={styles.buttonText}>
             {props.buttonText ?? 'Press Me!'}
           </Text>
         </Pressable>
